@@ -6,6 +6,11 @@
   box-sizing: border-box;
   line-height: 1.5;
 
+  > p {
+    color: red;
+    padding-left: 30px;
+  }
+
   input {
     display: block;
     width: 100%;

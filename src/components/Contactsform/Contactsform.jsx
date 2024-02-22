@@ -1,19 +1,20 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/reducers';
+
 import { handleContactsState } from '../../redux/selectors';
+import { addContactThunk } from '../../redux/thunk';
 
 export const Contactsform = () => {
   const contacts = useSelector(handleContactsState);
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const dispatch = useDispatch();
 
   const handleChange = ({ target }) => {
     if (target.name === 'name') {
       setName(target.value);
     } else {
-      setNumber(target.value);
+      setPhone(target.value);
     }
   };
   const handleSubmit = evt => {
@@ -21,9 +22,9 @@ export const Contactsform = () => {
     if (contacts.find(item => item.name === name)) {
       alert(`${name} is already in contacts.`);
     } else {
-      dispatch(addContact({ name, number }));
+      dispatch(addContactThunk({ name, phone }));
       setName('');
-      setNumber('');
+      setPhone('');
     }
   };
 
@@ -44,7 +45,7 @@ export const Contactsform = () => {
         Namber
         <input
           onChange={handleChange}
-          value={number}
+          value={phone}
           className="form__input"
           type="tel"
           name="number"
